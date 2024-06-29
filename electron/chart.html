@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html style="overflow: hidden;">
+<head>
+  <meta charset="UTF-8" />
+  <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+
+  <meta 
+    http-equiv="Content-Security-Policy" 
+    content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net/npm/ https://cdn.anychart.com/ 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' http://static.anychart.com/">
+  <meta
+    http-equiv="X-Content-Security-Policy"
+    content="default-src 'self'; script-src 'self' https://cdn.anychart.com/ 'unsafe-inline' https://cdn.jsdelivr.net/npm/; style-src 'self' 'unsafe-inline'; img-src 'self' http://static.anychart.com/"
+  />
+  <title>Gráfico</title>
+  <!-- Importar el archivo de scripts de Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    #container {
+      display: flex;
+      flex-direction: row;
+      height: 100vh;
+      background-color: white;
+    }
+    #sidebar {
+      width: 200px;
+      background-color: white;
+    }
+    #sidebar button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      background-color: #1E8A83;
+      color: #E0F8C1;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    #sidebar button:hover {
+      background-color: hsla(176, 64%, 33%, 0.705);
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <!-- Barra lateral con botones de selección -->
+    <div id="sidebar">
+      <button id="line-chart-btn" onclick="showLineChart()">Gráfico de líneas</button>
+      <button id="heatmap-chart-btn" onclick="showHeatmapChart()">Gráfico de calor</button>
+      <button id="values-btn" onclick="showValues()">Valores</button>
+    </div>
+
+    <!-- Contenedor principal para la gráfica -->
+    <div id="content-top" style="display: flex;  height: 100vh; flex-grow: 1; overflow: auto;">
+      <!-- Lienzo para la gráfica -->
+      <canvas id="line-chart" style="margin-bottom: 20px;"></canvas>
+      <div id="content" style="flex-grow: 1;"></div>
+      <div id="contentvalues" style="flex-grow: 1; overflow: auto;"></div>
+    </div>
+  </div>
+
+  <!-- Importar el archivo de scripts para manejar la lógica del gráfico -->
+  <script src="https://cdn.anychart.com/releases/8.10.0/js/anychart-bundle.min.js"></script>
+  <script src="chart.js"></script>
+</body>
+</html>
