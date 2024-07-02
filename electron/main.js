@@ -55,9 +55,6 @@ ipcMain.on('select-file-bed', (event, { fileExtension }) => {
 });
 
 ipcMain.on('python-data', (event, data) => {
-    console.log('Datos de Python recibidos en el proceso principal:', data);
-
-    // Hacer lo que necesites con los datos recibidos
     if (!chartWindow) {
         // Crear una nueva ventana para mostrar el gráfico si aún no existe
         chartWindow = new BrowserWindow({
