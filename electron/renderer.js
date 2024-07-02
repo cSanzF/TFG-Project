@@ -26,22 +26,21 @@ $button2.addEventListener('click', (event)=>{
 $k2Checkbox.addEventListener('change', () => {
     if ($k2Checkbox.checked) {
         selectedKValue = "2";
-        $k3Checkbox.checked = false; // Desmarca el otro checkbox si se marca este
+        $k3Checkbox.checked = false;
     }
 });
 
 $k3Checkbox.addEventListener('change', () => {
     if ($k3Checkbox.checked) {
         selectedKValue = "3";
-        $k2Checkbox.checked = false; // Desmarca el otro checkbox si se marca este
+        $k2Checkbox.checked = false;
     }
 });
 
 $processDataButton.addEventListener('click', ()=>{
-    console.log('Fasta:', selectedFastaPath)
-    console.log('Bed:', selectedBedPath)
-    console.log('Valor de K:', selectedKValue)
-    //Mostrar modal con los diferentes errores
+    //console.log('Fasta:', selectedFastaPath)
+    //console.log('Bed:', selectedBedPath)
+    //console.log('Valor de K:', selectedKValue)
     if (selectedFastaPath === ""){
         console.log("fasta vacio") 
     }
@@ -53,7 +52,7 @@ $processDataButton.addEventListener('click', ()=>{
         console.log("k vacio")
     }
 
-    const pythonScriptPath = 'C:\\Users\\Carlos\\Desktop\\tfg\\main.py';
+    const pythonScriptPath = 'C:\\Users\\Carlos\\Desktop\\tfg\\main.py'; //Modificar por la ruta del script main.py donde estará Python instalado
     const pythonProcess = spawn('python', [pythonScriptPath, selectedKValue, selectedFastaPath, selectedBedPath]);
 
     let pythonOutput = '';
@@ -84,14 +83,10 @@ $processDataButton.addEventListener('click', ()=>{
 ipc.on('file-selected-fasta', (event, filePath) => {
     selectedFastaPath = filePath;
     document.getElementById('selectedFastaLabel').innerText = filePath.split('\\').pop();
-    //console.log('Archivo seleccionado:', filePath);
-    // Puedes hacer lo que quieras con la ruta del archivo aquí
   });
 
 ipc.on('file-selected-bed', (event, filePath) => {
     selectedBedPath = filePath;
     document.getElementById('selectedBedLabel').innerText = filePath.split('\\').pop();
-    //console.log('Archivo seleccionado BED:', filePath);
-    // Puedes hacer lo que quieras con la ruta del archivo aquí
   });
 
