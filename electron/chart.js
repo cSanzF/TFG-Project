@@ -15,9 +15,6 @@ const ctx = canvas.getContext('2d');
 
 ipcRenderer.on('load-chart-data', (event, data) => {
     chartValueData = data;
-    console.log("ON load-chart-data")
-    // Lógica para mostrar la gráfica de líneas con Chart.js
-   
 
     // Determinar si los datos son dímeros o trímeros
     isDimer = Object.keys(data)[0].length === 2;
@@ -25,7 +22,6 @@ ipcRenderer.on('load-chart-data', (event, data) => {
 
     
     // Configurar los datos de la gráfica
-        console.log("Pintando line")
         chartData = {
             labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'], // Posiciones en el eje X
             datasets: Object.entries(data).map(([key, value]) => ({
@@ -42,7 +38,6 @@ ipcRenderer.on('load-chart-data', (event, data) => {
         Object.keys(data).forEach((key, index) => {
             let values = data[key];
             values.forEach((value, idx) => {
-                //if (value !== -Infinity) {
                 if (value !== 0){
                     chartDataArray.push({ x: y, y: key, heat: Math.log10(value) });
                 }else {
@@ -92,7 +87,6 @@ function getRandomColor() {
 }
 
 function showLineChart() {
-    console.log('ShowLineChart', currentChartType)
     if (currentChartType !== 'line') {
       currentChartType = 'line';
       canvas.style.display = "block";
@@ -102,7 +96,6 @@ function showLineChart() {
 }
 
 function showHeatmapChart() {
-    console.log('ShowHeatMapChart: ', currentChartType)
     canvas.style.display = "none";
     canvashm.style.display = "block";
     canvasvalues.style.display ='none';
@@ -164,10 +157,8 @@ function showValues() {
         table.style.borderCollapse = 'separate';
         table.style.borderSpacing = '5px';
 
-        // Agregar el cuerpo de la tabla al elemento de tabla
         table.appendChild(tableBody);
 
-        // Agregar la tabla al contenedor de valores
         contentDiv.appendChild(table);
     }
 }
@@ -182,13 +173,11 @@ function hideCharts() {
 function showCanvas(value) {
     // Si el valor es true, muestra el canvas
     if (value) {
-        console.log("ShowCanvasLine")
         canvas.style.display = "block";
         canvashm.style.display = "none";
         canvasvalues.style.display ='none';
     } else {
         // Si el valor es false, oculta el canvas
-        console.log("ShowCanvasHM")
         canvas.style.display = "none";
         canvashm.style.display = "block";
         canvasvalues.style.display ='none';
