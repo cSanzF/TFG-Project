@@ -8,19 +8,19 @@ class Nucleosome:
     nStart = ''
     nEnd = ''
     
-my_list = [] #Contains all seq
+my_list = [] 
 kmero = int(sys.argv[1])
 fasta_path = sys.argv[2]
 bed_path = sys.argv[3]
 
 
-#Read Fasta file
+
 ff = bioio.readFasta(path=fasta_path)
-#Read Bed file
+
 bb = open(bed_path)
 bList = bb.readlines()
 
-#Creation nucleosomal.fasta with collected data  
+
 j=0
 if os.path.exists("Nucleosomal.fasta"):
     os.remove("Nucleosomal.fasta")
