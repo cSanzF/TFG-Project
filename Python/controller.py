@@ -82,39 +82,28 @@ def plotData(dict, k):
 
 
 def heatmap(dict):
-    # Obtener todas las claves y valores
     keys = list(dict.keys())
     values = list(dict.values())
 
-    # Aplicar logaritmo en base 10 a los valores
     log_values = np.log10(np.maximum(1, np.array(values)))
 
-    # Crear la figura y el eje
-    fig, ax = plt.subplots(figsize=(10, 8))  # Puedes ajustar el tamaño según tus necesidades
-
-    # Crear el mapa de calor con valores logarítmicos y colormap 'plasma'
+    fig, ax = plt.subplots(figsize=(10, 8))  
+    
     cax = ax.imshow(log_values, cmap='plasma', interpolation='nearest', aspect='auto')
 
-    # Añadir barra de color
     cbar = fig.colorbar(cax)
 
-    # Etiquetar ejes
     ax.set_xticks(np.arange(log_values.shape[1]))
     ax.set_yticks(np.arange(len(keys)))
     ax.set_xticklabels(np.arange(1, log_values.shape[1] + 1))  # Ajustar las etiquetas según tus necesidades
     ax.set_yticklabels(keys)
 
-    # Rotar etiquetas en el eje x
     plt.setp(ax.get_xticklabels(), rotation=45, ha="right", rotation_mode="anchor")
 
-    # Ajustar el diseño automáticamente
     plt.tight_layout()
 
-    # Guardar la figura como PNG
     plt.savefig('charts/heatmap.png', dpi=300)  # Puedes ajustar el dpi según tus necesidades
 
-    # Mostrar el mapa de calor
-    #plt.show()
     data = {
         'keys': keys,
         'log_values': log_values.tolist()
@@ -131,14 +120,11 @@ def createDictTri():
     return (my_dict_trimero)
 
 def toJson(data):
-    # Supongamos que filledDict es el diccionario que recibes con matrices NumPy
     filledDict = data  # Supongamos que 'data' contiene el diccionario con matrices NumPy
 
-    # Convertir las matrices NumPy a listas de Python
     for key, value in filledDict.items():
         filledDict[key] = value.tolist()
 
-    # Convertir el diccionario a JSON
     json_data = json.dumps(filledDict)
 
     return json_data
